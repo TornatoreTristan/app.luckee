@@ -3,7 +3,7 @@
  * if you find something broken in this config file.
  */
 
-import { InertiaConfig } from '@ioc:EidelLev/Inertia';
+import { InertiaConfig } from '@ioc:EidelLev/Inertia'
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,7 @@ import { InertiaConfig } from '@ioc:EidelLev/Inertia';
 export const inertia: InertiaConfig = {
   view: 'app',
   ssr: {
-    enabled: true,
+    enabled: false,
     autoreload: process.env.NODE_ENV === 'development',
   },
-};
+}
