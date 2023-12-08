@@ -18,7 +18,7 @@
             <Link href="/dashboard">Dashboard</Link>
           </li>
           <li>
-            <Link href="/logout">Déconnexion</Link>
+            <button @click="logout">Déconnexion</button>
           </li>
         </ul>
       </nav>
@@ -30,16 +30,23 @@
   </main>
 </template>
 
-<script>
+<script setup>
 import { Link } from '@inertiajs/inertia-vue3'
-export default {
-  components: {
-    Link,
-  },
-  computed: {
-    auth() {
-      return this.$page.props.auth || { isLoggedIn: false }
-    },
-  },
+
+const logout = async () => {
+  try {
+    const response = await fetch('/logout', {
+      method: 'POST',
+    })
+    if (!response.ok) {
+      throw new Error('Problème lors de la déconnexion')
+    }
+    // TODO: Comprendre pourquoi je ne peux pas utiliser router.push ici
+    if (response.ok) {
+      window.location.href = '/login'
+    }
+  } catch (err) {
+    console.error(err)
+  }
 }
 </script>

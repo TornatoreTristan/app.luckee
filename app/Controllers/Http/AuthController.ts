@@ -28,4 +28,9 @@ export default class AuthController {
   public async getUserData({ auth, response }: HttpContextContract) {
     return response.ok({ user: auth.user, isLoggedIn: auth.isLoggedIn })
   }
+
+  public async Logout({ auth, response }: HttpContextContract) {
+    await auth.logout()
+    return response.ok({ isLoggedIn: auth.isLoggedIn })
+  }
 }

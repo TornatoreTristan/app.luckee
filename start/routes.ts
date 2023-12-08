@@ -28,3 +28,4 @@ Route.get('/dashboard', async ({ inertia, auth }) => {
 // Register new user
 Route.post('/signup', 'AuthController.Register')
 Route.post('/login', 'AuthController.Login')
+Route.post('/logout', 'AuthController.Logout')
