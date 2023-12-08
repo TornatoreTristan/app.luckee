@@ -4,6 +4,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
+@layer components {
+  h1 {
+    @apply text-4xl font-bold text-gray-800 py-4;
+  }
+  a {
+    @apply text-gray-800 font-bold hover:text-blue-600;
+  }
+}
+
 html,
 body {
   background-color: #f7f8fa;
@@ -13,28 +22,13 @@ body {
   position: relative;
 }
 
-body:before {
-  content: '';
-  background: #5a45ff;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  position: absolute;
-}
-
 * {
   margin: 0;
   padding: 0;
 }
 
-a {
-  color: #5a45ff;
-  text-decoration: none;
-}
-
 main {
-  max-width: 620px;
+  max-width: 70%;
   margin: auto;
   height: 100vh;
   padding: 0 30px;
