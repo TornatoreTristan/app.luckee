@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <h1>Loggin</h1>
-    <div>
+  <div class="flex justify-center items-center flex-col">
+    <h1>Connexion à votre compte</h1>
+    <div class="block-auth">
       <form @submit.prevent="handleSubmit">
-        <div>
+        <div class="input-auth">
           <label for="email">Votre email</label>
           <input type="email" name="email" id="email" />
         </div>
-        <div>
+        <div class="input-auth">
           <label for="password">Votre mot de passe</label>
           <input type="password" name="password" id="password" />
         </div>
-        <button type="submit">S'inscrire</button>
+        <button class="btn" type="submit">Se connecter</button>
       </form>
     </div>
   </div>
@@ -32,7 +32,7 @@ const handleSubmit = async () => {
     const data = await response.json()
 
     if (response.ok) {
-      router.push('/dashboard')
+      window.location.href = '/dashboard'
     }
     console.log(data)
   } catch (error) {

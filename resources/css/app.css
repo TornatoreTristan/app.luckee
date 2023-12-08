@@ -6,10 +6,34 @@
 
 @layer components {
   h1 {
-    @apply text-4xl font-bold text-gray-800 py-4;
+    @apply text-xl font-bold text-gray-800 py-4;
+  }
+  p {
+    @apply text-gray-800 text-[14px];
   }
   a {
     @apply text-gray-800 font-bold hover:text-blue-600;
+  }
+  label {
+    @apply text-gray-800 text-sm;
+  }
+  header {
+    @apply px-[12%];
+  }
+  .block-auth {
+    @apply bg-neutral-50 bg-opacity-20 rounded-lg border-2 border-gray-200 w-6/12 p-16 mb-4;
+  }
+  .input-auth {
+    @apply pb-4 flex flex-col;
+  }
+  .input-auth input {
+    @apply py-2 px-4 rounded-lg text-xs border-gray-200 bg-transparent border focus:border-2 focus:outline-none focus:border-emerald-300 my-2;
+  }
+  .btn {
+    @apply bg-slate-600 text-white py-3 px-4 rounded text-xs font-bold;
+  }
+  .container-content {
+    @apply py-16 bg-slate-100 px-[12%] w-full;
   }
 }
 
@@ -17,9 +41,7 @@ html,
 body {
   background-color: #f7f8fa;
   font-family: 'Poppins', sans-serif;
-  height: 100vh;
   color: #46444c;
-  position: relative;
 }
 
 * {
@@ -27,15 +49,9 @@ body {
   padding: 0;
 }
 
-main {
-  max-width: 70%;
-  margin: auto;
-  height: 100vh;
-  padding: 0 30px;
-}
-
 p {
   margin-bottom: 20px;
+  font-size: 14px;
 }
 
 header ul {
