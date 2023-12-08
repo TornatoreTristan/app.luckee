@@ -5,7 +5,7 @@
         <div class="flex items-center">
           <Link href="/">Logo</Link>
         </div>
-        <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center">
+        <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center gap-8">
           <li>
             <Link href="/login">Connexion</Link>
           </li>
@@ -23,9 +23,13 @@
         </ul>
       </nav>
     </header>
-    <slot></slot>
-    <footer>
-      <p class="text-slate-400">2023 © Luckee est développé par Tristan TORNATORE</p>
+    <div class="container-content">
+      <slot></slot>
+    </div>
+    <footer class="py-8">
+      <p class="text-slate-400 text-xs text-center">
+        2023 © Luckee est développé par Tristan TORNATORE
+      </p>
     </footer>
   </main>
 </template>
