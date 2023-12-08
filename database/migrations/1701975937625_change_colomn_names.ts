@@ -7,8 +7,8 @@ export default class extends BaseSchema {
     this.schema.alterTable(this.tableName, (table) => {
       table.string('password').notNullable()
       table.string('email').notNullable().unique()
-      table.string('firstName').nullable()
-      table.string('lastName').nullable()
+      table.string('first_name').nullable()
+      table.string('last_name').nullable()
       table.string('role').notNullable().defaultTo('user')
       table.string('remember_me_token').nullable()
     })

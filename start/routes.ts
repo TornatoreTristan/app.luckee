@@ -1,13 +1,30 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 /**
- * View Routes
+ * Views Routes
  */
 
 Route.get('/', async ({ inertia }) => {
   return inertia.render('Home')
 })
+Route.get('/signup', async ({ inertia, auth }) => {
+  console.log(auth.isLoggedIn)
+  return inertia.render('Register')
+})
+Route.get('/login', async ({ inertia }) => {
+  return inertia.render('Login')
+})
+Route.get('/dashboard', async ({ inertia, auth }) => {
+  console.log(auth.isLoggedIn)
+  return inertia.render('Dashboard', {
+    user: auth.user,
+  })
+}).middleware('auth')
 
 /**
  * Auth Routes
  */
+
+// Register new user
+Route.post('/signup', 'AuthController.Register')
+Route.post('/login', 'AuthController.Login')
