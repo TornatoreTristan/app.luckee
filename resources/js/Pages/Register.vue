@@ -1,25 +1,25 @@
 <template>
-  <div>
-    <h1>Register</h1>
-    <div>
+  <div class="flex flex-col justify-center items-center">
+    <h1>S'inscrire</h1>
+    <div class="block-auth">
       <form @submit.prevent="handleSubmit">
-        <div>
+        <div class="input-auth">
           <label for="email">Votre email</label>
           <input type="email" name="email" id="email" />
         </div>
-        <div>
+        <div class="input-auth">
           <label for="firstname">Votre prénom</label>
           <input type="text" name="firstname" id="firstname" />
         </div>
-        <div>
+        <div class="input-auth">
           <label for="lastname">Votre nom</label>
           <input type="text" name="lastname" id="lastname" />
         </div>
-        <div>
+        <div class="input-auth">
           <label for="password">Votre mot de passe</label>
           <input type="password" name="password" id="password" />
         </div>
-        <button type="submit">S'inscrire</button>
+        <button class="btn" type="submit">S'inscrire</button>
       </form>
     </div>
   </div>
@@ -29,8 +29,8 @@
 const handleSubmit = async () => {
   const formData = new FormData()
   formData.append('email', email.value)
-  formData.append('firstname', firstname.value)
-  formData.append('lastname', lastname.value)
+  formData.append('firstName', firstname.value)
+  formData.append('lastName', lastname.value)
   formData.append('password', password.value)
 
   try {
@@ -40,8 +40,8 @@ const handleSubmit = async () => {
     })
     const data = await response.json()
 
-    if (data.response === 'ok') {
-      router.push('/dashboard')
+    if (response.ok) {
+      window.location.href = '/dashboard'
     }
     console.log(data)
   } catch (error) {
