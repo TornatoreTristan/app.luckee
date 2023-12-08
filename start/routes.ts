@@ -15,7 +15,6 @@ Route.get('/login', async ({ inertia }) => {
   return inertia.render('Login')
 })
 Route.get('/dashboard', async ({ inertia, auth }) => {
-  console.log(auth.isLoggedIn)
   return inertia.render('Dashboard', {
     user: auth.user,
   })
