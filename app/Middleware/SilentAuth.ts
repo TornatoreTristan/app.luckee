@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Inertia from '@ioc:EidelLev/Inertia'
 
 /**
  * Silent auth middleware can be used as a global middleware to silent check
@@ -16,6 +17,15 @@ export default class SilentAuthMiddleware {
      * set to the instance of the currently logged in user.
      */
     await auth.check()
+
+    // Share the auth state with the frontend
+    Inertia.share({
+      auth: {
+        user: auth.user,
+        isLoggedIn: auth.isLoggedIn,
+      },
+    })
+
     await next()
   }
 }
