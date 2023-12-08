@@ -3,8 +3,6 @@ import User from '../../Models/User'
 
 export default class AuthController {
   public async Register({ auth, request, response }: HttpContextContract) {
-    console.log(request.all())
-    console.log(auth.isLoggedIn)
     const { email, password, firstName, lastName } = request.only([
       'email',
       'password',
@@ -23,9 +21,7 @@ export default class AuthController {
 
   public async Login({ auth, request, response }: HttpContextContract) {
     const { email, password } = request.only(['email', 'password'])
-    console.log('Hello')
     await auth.use('web').attempt(email, password)
-    console.log(auth.isLoggedIn)
     return response.ok({ user: auth.user, isLoggedIn: auth.isLoggedIn })
   }
 
