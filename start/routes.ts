@@ -19,6 +19,11 @@ Route.get('/dashboard', async ({ inertia, auth }) => {
     user: auth.user,
   })
 }).middleware('auth')
+Route.get('/profile', async ({ inertia, auth }) => {
+  return inertia.render('Profile', {
+    user: auth.user,
+  })
+}).middleware('auth')
 
 /**
  * Auth Routes
