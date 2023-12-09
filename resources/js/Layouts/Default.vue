@@ -5,6 +5,11 @@
         <div class="flex items-center">
           <Link href="/">Logo</Link>
         </div>
+        <Link href="/nouvelle-publication">
+          <button class="bg-slate-700 text-xs text-white py-2 px-4 rounded-lg font-bold">
+            Créer une nouvelle publication
+          </button>
+        </Link>
         <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center gap-8">
           <li>
             <Link href="/login">Connexion</Link>

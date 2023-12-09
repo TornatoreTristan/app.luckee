@@ -24,6 +24,9 @@ Route.get('/profile', async ({ inertia, auth }) => {
     user: auth.user,
   })
 }).middleware('auth')
+Route.get('/nouvelle-publication', async ({ inertia }) => {
+  return inertia.render('NewPost')
+}).middleware('auth')
 
 /**
  * Auth Routes
