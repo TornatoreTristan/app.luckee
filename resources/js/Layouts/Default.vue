@@ -13,14 +13,34 @@
             <Link href="/signup">Inscription</Link>
           </li>
         </ul>
-        <ul v-else class="flex justify-center items-center gap-8">
+        <div v-else class="flex justify-center items-center gap-8">
+          <!-- TODO: Ajouter une fonction qui permet d'afficher la div ci-dessous au click -->
+          <div>
+            <button
+              @click="handleNav"
+              class="rounded-full bg-slate-200 flex justify-center items-center w-14 h-14"
+            >
+              TT
+            </button>
+            <ul>
+              <li>
+                <Link href="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <button @click="logout">Déconnexion</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- <ul>
           <li>
             <Link href="/dashboard">Dashboard</Link>
           </li>
           <li>
             <button @click="logout">Déconnexion</button>
           </li>
-        </ul>
+        </ul> -->
       </nav>
     </header>
     <div class="container-content">
