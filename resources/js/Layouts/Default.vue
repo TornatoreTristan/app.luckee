@@ -26,10 +26,10 @@
               class="absolute bg-white p-6 -translate-x-1/2 left-1/2 w-[200px] top-16 text-xs flex flex-col gap-4 rounded-lg"
             >
               <li>
-                <Link href="/dashboard">Dashboard</Link>
+                <Link @click="handleNav" href="/dashboard">Dashboard</Link>
               </li>
               <li>
-                <Link href="/profile">Compte</Link>
+                <Link @click="handleNav" href="/profile">Compte</Link>
               </li>
               <li>
                 <button

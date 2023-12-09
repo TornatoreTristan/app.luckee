@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Votre profil</h1>
+    <h1>Mon compte</h1>
     <hr class="mb-4" />
   </div>
   <div class="flex items-center gap-4">
