@@ -14,33 +14,34 @@
           </li>
         </ul>
         <div v-else class="flex justify-center items-center gap-8">
-          <!-- TODO: Ajouter une fonction qui permet d'afficher la div ci-dessous au click -->
-          <div>
+          <div class="relative" ref="menuRef">
             <button
               @click="handleNav"
-              class="rounded-full bg-slate-200 flex justify-center items-center w-14 h-14"
+              class="rounded-full bg-slate-200 flex justify-center items-center w-14 h-14 relative border border-slate-400 hover:shadow-md"
             >
               TT
             </button>
-            <ul>
+            <ul
+              v-if="isMenuIsVisible"
+              class="absolute bg-white p-6 -translate-x-1/2 left-1/2 w-[200px] top-16 text-xs flex flex-col gap-4 rounded-lg"
+            >
               <li>
                 <Link href="/dashboard">Dashboard</Link>
               </li>
               <li>
-                <button @click="logout">Déconnexion</button>
+                <Link href="/profile">Compte</Link>
+              </li>
+              <li>
+                <button
+                  class="bg-red-100 py-2 px-4 rounded text-red-600 w-full font-bold mt-4"
+                  @click="logout"
+                >
+                  Déconnexion
+                </button>
               </li>
             </ul>
           </div>
         </div>
-
-        <!-- <ul>
-          <li>
-            <Link href="/dashboard">Dashboard</Link>
-          </li>
-          <li>
-            <button @click="logout">Déconnexion</button>
-          </li>
-        </ul> -->
       </nav>
     </header>
     <div class="container-content">
@@ -56,6 +57,28 @@
 
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+let isMenuIsVisible = ref(false)
+const menuRef = ref(null)
+
+const handleNav = () => {
+  isMenuIsVisible.value = !isMenuIsVisible.value
+}
+
+const handleClickOutside = (event) => {
+  if (menuRef.value && !menuRef.value.contains(event.target)) {
+    isMenuIsVisible.value = false
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('click', handleClickOutside)
+})
 
 const logout = async () => {
   try {
