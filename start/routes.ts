@@ -36,3 +36,8 @@ Route.get('/nouvelle-publication', async ({ inertia }) => {
 Route.post('/signup', 'AuthController.Register')
 Route.post('/login', 'AuthController.Login')
 Route.post('/logout', 'AuthController.Logout')
+
+/**
+ * OpenAI
+ */
+Route.post('/openai', 'OpenAisController.generateText')
