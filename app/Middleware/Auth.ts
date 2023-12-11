@@ -1,6 +1,7 @@
 import { AuthenticationException } from '@adonisjs/auth/build/standalone'
 import type { GuardsList } from '@ioc:Adonis/Addons/Auth'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Inertia from '@ioc:EidelLev/Inertia'
 
 /**
  * Auth middleware is meant to restrict un-authenticated access to a given route
@@ -41,6 +42,14 @@ export default class AuthMiddleware {
          * the rest of the request, since the user authenticated
          * succeeded here
          */
+
+        Inertia.share({
+          auth: {
+            user: auth.user,
+            isLoggedIn: auth.isLoggedIn,
+          },
+        })
+
         auth.defaultGuard = guard
         return true
       }
@@ -53,14 +62,14 @@ export default class AuthMiddleware {
       'Unauthorized access',
       'E_UNAUTHORIZED_ACCESS',
       guardLastAttempted,
-      this.redirectTo,
+      this.redirectTo
     )
   }
 
   /**
    * Handle request
    */
-  public async handle (
+  public async handle(
     { auth }: HttpContextContract,
     next: () => Promise<void>,
     customGuards: (keyof GuardsList)[]
