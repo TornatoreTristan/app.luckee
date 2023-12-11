@@ -5,11 +5,6 @@
         <div class="flex items-center">
           <Link href="/">Logo</Link>
         </div>
-        <Link href="/nouvelle-publication">
-          <button class="bg-slate-700 text-xs text-white py-2 px-4 rounded-lg font-bold">
-            Créer une nouvelle publication
-          </button>
-        </Link>
         <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center gap-8">
           <li>
             <Link href="/login">Connexion</Link>
@@ -19,32 +14,39 @@
           </li>
         </ul>
         <div v-else class="flex justify-center items-center gap-8">
-          <div class="relative" ref="menuRef">
-            <button
-              @click="handleNav"
-              class="rounded-full bg-slate-200 flex justify-center items-center w-14 h-14 relative border border-slate-400 hover:shadow-md"
-            >
-              TT
-            </button>
-            <ul
-              v-if="isMenuIsVisible"
-              class="absolute bg-white p-6 -translate-x-1/2 left-1/2 w-[200px] top-16 text-xs flex flex-col gap-4 rounded-lg"
-            >
-              <li>
-                <Link @click="handleNav" href="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link @click="handleNav" href="/profile">Compte</Link>
-              </li>
-              <li>
-                <button
-                  class="bg-red-100 py-2 px-4 rounded text-red-600 w-full font-bold mt-4"
-                  @click="logout"
-                >
-                  Déconnexion
-                </button>
-              </li>
-            </ul>
+          <div class="relative flex gap-4 items-center" ref="menuRef">
+            <Link href="/nouvelle-publication">
+              <button class="bg-slate-700 text-xs text-white py-2 px-4 rounded-lg font-bold">
+                Créer une nouvelle publication
+              </button>
+            </Link>
+            <div class="relative">
+              <button
+                @click="handleNav"
+                class="rounded-full bg-slate-200 flex justify-center items-center w-14 h-14 relative border border-slate-400 hover:shadow-md"
+              >
+                TT
+              </button>
+              <ul
+                v-if="isMenuIsVisible"
+                class="absolute bg-white p-6 -translate-x-1/2 left-1/2 w-[200px] top-16 text-xs flex flex-col gap-4 rounded-lg"
+              >
+                <li>
+                  <Link @click="handleNav" href="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <Link @click="handleNav" href="/profile">Compte</Link>
+                </li>
+                <li>
+                  <button
+                    class="bg-red-100 py-2 px-4 rounded text-red-600 w-full font-bold mt-4"
+                    @click="logout"
+                  >
+                    Déconnexion
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>
