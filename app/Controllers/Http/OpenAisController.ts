@@ -1,30 +1,32 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
 import OpenAI from 'openai'
 
-class OpenAIController {
+export default class OpenAisController {
   public async generateText({ request, response }) {
-    const prompt = request.input('prompt')
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY, // Assurez-vous que la clé API est stockée de manière sécurisée
+    response.response.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
     })
-
-    console.log(`Prompt: ${prompt}`)
-
-    try {
-      const openAIResponse = await openai.completions.create({
-        model: 'text-davinci-003', // ou un autre modèle selon votre besoin
-        prompt: prompt,
-        max_tokens: 150,
-      })
-
-      return response.json(openAIResponse)
-    } catch (error) {
-      return response
-        .status(500)
-        .json({ message: 'Erreur lors de la communication avec OpenAI', error })
+    const prompt = request.input('prompt')
+    const openai = process.env.OPENAI_API_KEY
+      ? // @ts-ignore
+        new OpenAI(String(process.env.OPENAI_API_KEY))
+      : null
+    const stream = await openai?.chat.completions.create({
+      model: 'gpt-4',
+      messages: [
+        { role: 'user', content: `rédige moi une publication linkedIn sur ce sujet ${prompt}` },
+      ],
+      stream: true,
+    })
+    if (!stream) {
+      return response.badRequest({ error: 'erreur' })
+    }
+    for await (const chunk of stream) {
+      const content = chunk.choices[0]?.delta?.content || ''
+      // Assurez-vous que le texte est encodé correctement
+      const formattedContent = `data: ${JSON.stringify(content)}\n\n`
+      response.response.write(formattedContent)
     }
   }
 }
-
-module.exports = OpenAIController

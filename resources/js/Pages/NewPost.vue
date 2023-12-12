@@ -4,7 +4,7 @@
   </div>
   <div class="flex gap-8 justify-between">
     <div class="bg-neutral-50 bg-opacity-20 rounded-lg border-2 border-gray-200 w-6/12 p-16 mb-4">
-      <form @submit.prevent="getOpenAIResponse">
+      <form @submit.prevent="connectToStream">
         <div class="input-auth">
           <label for="subject">Vous pensez à un sujet ? </label>
           <input v-model="prompt" type="text" id="subject" name="subject" />
@@ -32,49 +32,24 @@
         </div>
       </div>
       <div class="mt-6">
-        <p v-if="openAIResponse && openAIResponse.choices && openAIResponse.choices.length > 0">
-          {{ openAIResponse.choices[0].text }}
+        <p v-if="generatedText" class="whitespace-pre-line">
+          {{ generatedText }}
         </p>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-    const prompt = ref('')
-    const openAIResponse = ref('')
-
-    const getOpenAIResponse = async () => {
-      console.log(prompt.value)
-      try {
-        const response = await fetch('/openai', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ prompt: prompt.value }),
-        })
-
-        if (!response.ok) {
-          throw new Error('Erreur réseau')
-        }
-
-        const data = await response.json()
-        openAIResponse.value = data
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    return {
-      prompt,
-      openAIResponse,
-      getOpenAIResponse,
-    }
-  },
+const prompt = ref('')
+const generatedText = ref('')
+const connectToStream = async () => {
+  const eventSource = new EventSource(`/openai?prompt=${prompt.value}`)
+  eventSource.onmessage = (event) => {
+    const text = JSON.parse(event.data)
+    generatedText.value += text
+  }
 }
 </script>

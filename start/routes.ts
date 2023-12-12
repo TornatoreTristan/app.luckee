@@ -27,6 +27,10 @@ Route.get('/profile', async ({ inertia, auth }) => {
 Route.get('/nouvelle-publication', async ({ inertia }) => {
   return inertia.render('NewPost')
 }).middleware('auth')
+Route.get('/clock', async ({ inertia }) => {
+  return inertia.render('Clock')
+})
+Route.get('/event', 'CocksController.stream')
 
 /**
  * Auth Routes
@@ -40,4 +44,4 @@ Route.post('/logout', 'AuthController.Logout')
 /**
  * OpenAI
  */
-Route.post('/openai', 'OpenAisController.generateText')
+Route.get('/openai', 'OpenAisController.generateText')
