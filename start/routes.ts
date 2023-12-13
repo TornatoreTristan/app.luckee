@@ -1,12 +1,15 @@
 import Route from '@ioc:Adonis/Core/Route'
+import User from 'App/Models/User'
 
 /**
  * Views Routes
  */
 
-Route.get('/', async ({ inertia }) => {
-  return inertia.render('Home')
-})
+Route.get('/', async ({ inertia, auth }) => {
+  return inertia.render('Dashboard', {
+    user: auth.user,
+  })
+}).middleware('auth')
 Route.get('/signup', async ({ inertia, auth }) => {
   console.log(auth.isLoggedIn)
   return inertia.render('Register')
@@ -14,11 +17,6 @@ Route.get('/signup', async ({ inertia, auth }) => {
 Route.get('/login', async ({ inertia }) => {
   return inertia.render('Login')
 })
-Route.get('/dashboard', async ({ inertia, auth }) => {
-  return inertia.render('Dashboard', {
-    user: auth.user,
-  })
-}).middleware('auth')
 Route.get('/profile', async ({ inertia, auth }) => {
   return inertia.render('Profile', {
     user: auth.user,
@@ -27,14 +25,50 @@ Route.get('/profile', async ({ inertia, auth }) => {
 Route.get('/nouvelle-publication', async ({ inertia }) => {
   return inertia.render('NewPost')
 }).middleware('auth')
-Route.get('/clock', async ({ inertia }) => {
-  return inertia.render('Clock')
-})
-Route.get('/event', 'CocksController.stream')
 
 /**
  * Auth Routes
  */
+
+// LinkedIn Auth
+Route.get('/linkedin/redirect', async ({ ally }) => {
+  return ally.use('linkedin').redirect()
+})
+
+Route.get('/linkedin/callback', async ({ ally, auth }) => {
+  const linkedin = ally.use('linkedin')
+
+  if (linkedin.accessDenied()) {
+    return 'Access was denied'
+  }
+
+  if (linkedin.stateMisMatch()) {
+    return 'Request expired. Retry again'
+  }
+
+  if (linkedin.hasError()) {
+    return linkedin.getError()
+  }
+
+  const linkedInUser = await linkedin.user()
+  console.log(linkedInUser)
+
+  const user = await User.firstOrCreate(
+    {
+      email: linkedInUser.email ?? 'default@example.com',
+    },
+    {
+      first_name: linkedInUser.original.localizedFirstName,
+      last_name: linkedInUser.original.localizedLastName,
+      avatar: linkedInUser.avatarUrl,
+      linkedin_id: linkedInUser.id,
+      linkedin_token: linkedInUser.token.token,
+      email: linkedInUser.email ?? 'default@example.com',
+    }
+  )
+
+  await auth.use('web').login(user)
+})
 
 // Register new user
 Route.post('/signup', 'AuthController.Register')

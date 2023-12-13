@@ -21,6 +21,9 @@
         </div>
         <button class="btn" type="submit">S'inscrire</button>
       </form>
+      <div>
+        <button @click="loginWithLinkedIn">Login with LinkedIn</button>
+      </div>
     </div>
   </div>
 </template>
@@ -47,5 +50,9 @@ const handleSubmit = async () => {
   } catch (error) {
     console.log(error)
   }
+}
+
+const loginWithLinkedIn = () => {
+  window.location.href = '/linkedin/redirect'
 }
 </script>

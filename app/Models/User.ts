@@ -22,7 +22,22 @@ export default class User extends BaseModel {
   public password: string
 
   @column()
+  public linkedin_id: string | null
+
+  @column()
+  public linkedin_token: string | null
+
+  @column()
+  public ally_id: string | null
+
+  @column()
+  public ally_token: string | null
+
+  @column()
   public rememberMeToken: string | null
+
+  @column()
+  public avatar: string | null
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
