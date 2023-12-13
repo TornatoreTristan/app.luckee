@@ -25,7 +25,15 @@
                 @click="handleNav"
                 class="rounded-full bg-slate-200 flex justify-center items-center w-14 h-14 relative border border-slate-400 hover:shadow-md"
               >
-                TT
+                <img
+                  v-if="$page.props.auth.user.avatar"
+                  :src="$page.props.auth.user.avatar"
+                  alt="Image de l'utilisatieur"
+                  class="rounded-full"
+                />
+                <span v-else>{{
+                  $page.props.auth.user.first_name[0] + ' ' + $page.props.auth.user.last_name[0]
+                }}</span>
               </button>
               <ul
                 v-if="isMenuIsVisible"
@@ -59,8 +67,8 @@
       <div class="flex items-start justify-between">
         <div class="w-6/12">
           <h3>Logo</h3>
-          <p>© Tristan TORNATORE</p>
-          <p>Tous droits réservés</p>
+          <p class="text-xs mb-1">© Tristan TORNATORE</p>
+          <p class="text-xs">Tous droits réservés</p>
         </div>
         <div class="3/12">
           <h3>Luckee</h3>

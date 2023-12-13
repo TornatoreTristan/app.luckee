@@ -28,7 +28,7 @@ const allyConfig: AllyConfig = {
     clientId: Env.get('LINKEDIN_CLIENT_ID'),
     clientSecret: Env.get('LINKEDIN_CLIENT_SECRET'),
     callbackUrl: 'http://localhost:3333/linkedin/callback',
-    scopes: ['r_liteprofile', 'r_emailaddress'],
+    scopes: ['r_liteprofile', 'r_emailaddress', 'w_member_social'],
   },
 }
 

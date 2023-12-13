@@ -35,7 +35,7 @@ Route.get('/linkedin/redirect', async ({ ally }) => {
   return ally.use('linkedin').redirect()
 })
 
-Route.get('/linkedin/callback', async ({ ally, auth }) => {
+Route.get('/linkedin/callback', async ({ ally, auth, response }) => {
   const linkedin = ally.use('linkedin')
 
   if (linkedin.accessDenied()) {
@@ -61,13 +61,15 @@ Route.get('/linkedin/callback', async ({ ally, auth }) => {
       first_name: linkedInUser.original.localizedFirstName,
       last_name: linkedInUser.original.localizedLastName,
       avatar: linkedInUser.avatarUrl,
-      linkedin_id: linkedInUser.id,
+      linkedin_id: linkedInUser.original.id,
       linkedin_token: linkedInUser.token.token,
       email: linkedInUser.email ?? 'default@example.com',
     }
   )
 
   await auth.use('web').login(user)
+
+  return response.redirect().toRoute('/')
 })
 
 // Register new user
