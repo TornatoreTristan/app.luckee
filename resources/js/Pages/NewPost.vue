@@ -9,7 +9,31 @@
           <label for="subject">Vous pensez à un sujet ? </label>
           <input v-model="prompt" type="text" id="subject" name="subject" />
         </div>
-        <button class="btn">Écrire une publication</button>
+        <div>
+          <hr class="my-4" />
+          <div>
+            <div>
+              <h4>Pronom</h4>
+              <div class="flex gap-2">
+                <ToggleButton v-model="pronomChoice" value="tutoiement">Tutoiement</ToggleButton>
+                <ToggleButton v-model="pronomChoice" value="vouvoiement">Vouvoiement</ToggleButton>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h4>Model</h4>
+              <p class="text-[12px] text-gray-400 mb-4">
+                Le model d'entraînemnt utilisé par l'IA. Luckee est un modèle entraîné par nos soins
+                sur plus de 400 publications linkedIn soigneusement choisies.
+              </p>
+              <div class="flex gap-2">
+                <ToggleButton v-model="modelChoice" value="gpt-3">GPT-3.5</ToggleButton>
+                <ToggleButton v-model="modelChoice" value="gpt-4">GPT-4</ToggleButton>
+                <ToggleButton v-model="modelChoice" value="luckee-ft">Luckee</ToggleButton>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn mt-12">Générer une publication</button>
       </form>
     </div>
     <div class="rounded-lg bg-white border border-gray-200 w-6/12 p-6">
@@ -17,7 +41,15 @@
         <div
           class="bg-gray-600 rounded-full border border-gray-200 w-[60px] h-[60px] flex justify-center items-center text-white"
         >
-          TT
+          <img
+            v-if="$page.props.auth.user.avatar"
+            :src="$page.props.auth.user.avatar"
+            :alt="$page.props.auth.user.first_name + ' ' + $page.props.auth.user.last_name"
+            class="rounded-full"
+          />
+          <span v-else>{{
+            $page.props.auth.user.first_name[0] + ' ' + $page.props.auth.user.last_name[0]
+          }}</span>
         </div>
         <div>
           <h2>
@@ -32,7 +64,7 @@
         </div>
       </div>
       <div class="mt-6">
-        <p v-if="generatedText" class="whitespace-pre-line">
+        <p v-if="generatedText" class="whitespace-pre-line text-xs">
           {{ generatedText }}
         </p>
       </div>
@@ -42,11 +74,16 @@
 
 <script setup>
 import { ref } from 'vue'
+import ToggleButton from './../Components/Forms/ToggleButton.vue'
 
 const prompt = ref('')
 const generatedText = ref('')
+const pronomChoice = ref('tutoiement')
+const modelChoice = ref('luckee-ft')
 const connectToStream = async () => {
-  const eventSource = new EventSource(`/openai?prompt=${prompt.value}`)
+  const eventSource = new EventSource(
+    `/openai?prompt=${prompt.value}&pronom=${pronomChoice.value}&model=${modelChoice.value}`
+  )
   eventSource.onmessage = (event) => {
     const text = JSON.parse(event.data)
     generatedText.value += text
