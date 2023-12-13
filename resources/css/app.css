@@ -35,6 +35,9 @@
   h3 {
     @apply text-lg font-bold text-gray-800 py-4;
   }
+  h4 {
+    @apply text-sm font-bold text-gray-800 py-2;
+  }
   .container-content {
     @apply py-16 bg-slate-100 px-[12%] w-full;
   }
