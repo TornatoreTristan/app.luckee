@@ -1,30 +1,54 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
 import OpenAI from 'openai'
 
-class OpenAIController {
+export default class OpenAisController {
   public async generateText({ request, response }) {
-    const prompt = request.input('prompt')
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY, // Assurez-vous que la clé API est stockée de manière sécurisée
+    response.response.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
     })
+    const { prompt, pronom, model } = request.all()
+    console.log(prompt, pronom, model)
 
-    console.log(`Prompt: ${prompt}`)
+    const modelToUse = (model) => {
+      switch (model) {
+        case 'gpt-3':
+          return 'gpt-3.5-turbo-0613'
+        case 'gpt-4':
+          return 'gpt-4'
+        case 'luckee-ft':
+          return 'ft:gpt-3.5-turbo-0613:tristan-tornatore::81a0sIpH'
+      }
+    }
 
-    try {
-      const openAIResponse = await openai.completions.create({
-        model: 'text-davinci-003', // ou un autre modèle selon votre besoin
-        prompt: prompt,
-        max_tokens: 150,
-      })
-
-      return response.json(openAIResponse)
-    } catch (error) {
-      return response
-        .status(500)
-        .json({ message: 'Erreur lors de la communication avec OpenAI', error })
+    const openai = process.env.OPENAI_API_KEY
+      ? // @ts-ignore
+        new OpenAI(String(process.env.OPENAI_API_KEY))
+      : null
+    const stream = await openai?.chat.completions.create({
+      model: modelToUse(model) as
+        | 'gpt-3.5-turbo-0613'
+        | 'gpt-4'
+        | 'ft:gpt-3.5-turbo-0613:tristan-tornatore::81a0sIpH',
+      messages: [
+        {
+          role: 'system',
+          content: `Tu es Luckee, un expert du Personal Branding. Ton rôle est de livrer des publications prête à poster pour LinkdIn avec les informations et le contexte que te donne l'utilisateur. Tu es crétif et tu cherches à créer des publications virales. Tu peux utliser des emoticons et pense à rendre la publication lisible ave une accroche irresistible et des sauts de lignes.`,
+        },
+        {
+          role: 'user',
+          content: `Rédige moi une publication LinkedIn prete à poster sur le thème ${prompt}. Tu utiliseras le ${pronom}.`,
+        },
+      ],
+      stream: true,
+    })
+    if (!stream) {
+      return response.badRequest({ error: 'erreur' })
+    }
+    for await (const chunk of stream) {
+      const content = chunk.choices[0]?.delta?.content || ''
+      const formattedContent = `data: ${JSON.stringify(content)}\n\n`
+      response.response.write(formattedContent)
     }
   }
 }
-
-module.exports = OpenAIController

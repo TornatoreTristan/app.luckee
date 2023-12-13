@@ -33,4 +33,7 @@ export default Env.rules({
   PG_DB_NAME: Env.schema.string(),
   // OpenAI
   OPENAI_API_KEY: Env.schema.string(),
+  // Social o2auth
+  LINKEDIN_CLIENT_ID: Env.schema.string(),
+  LINKEDIN_CLIENT_SECRET: Env.schema.string(),
 })

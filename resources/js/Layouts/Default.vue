@@ -25,14 +25,22 @@
                 @click="handleNav"
                 class="rounded-full bg-slate-200 flex justify-center items-center w-14 h-14 relative border border-slate-400 hover:shadow-md"
               >
-                TT
+                <img
+                  v-if="$page.props.auth.user.avatar"
+                  :src="$page.props.auth.user.avatar"
+                  alt="Image de l'utilisatieur"
+                  class="rounded-full"
+                />
+                <span v-else>{{
+                  $page.props.auth.user.first_name[0] + ' ' + $page.props.auth.user.last_name[0]
+                }}</span>
               </button>
               <ul
                 v-if="isMenuIsVisible"
                 class="absolute bg-white p-6 -translate-x-1/2 left-1/2 w-[200px] top-16 text-xs flex flex-col gap-4 rounded-lg"
               >
                 <li>
-                  <Link @click="handleNav" href="/dashboard">Dashboard</Link>
+                  <Link @click="handleNav" href="/">Dashboard</Link>
                 </li>
                 <li>
                   <Link @click="handleNav" href="/profile">Compte</Link>
@@ -54,10 +62,32 @@
     <div class="container-content">
       <slot></slot>
     </div>
-    <footer class="py-8">
-      <p class="text-slate-400 text-xs text-center">
-        2023 © Luckee est développé par Tristan TORNATORE
-      </p>
+    <footer class="container-content py-8">
+      <hr class="my-4" />
+      <div class="flex items-start justify-between">
+        <div class="w-6/12">
+          <h3>Logo</h3>
+          <p class="text-xs mb-1">© Tristan TORNATORE</p>
+          <p class="text-xs">Tous droits réservés</p>
+        </div>
+        <div class="3/12">
+          <h3>Luckee</h3>
+          <ul class="text-xs flex flex-col gap-1">
+            <li>Support</li>
+            <li>Légal</li>
+            <li>Termes d'utilisation</li>
+            <li>Confidentialité</li>
+          </ul>
+        </div>
+        <div class="3/12">
+          <h3>Social</h3>
+          <ul class="text-xs flex flex-col gap-1">
+            <li>LinkedIn</li>
+            <li>Twitter</li>
+            <li>Instagram</li>
+          </ul>
+        </div>
+      </div>
     </footer>
   </main>
 </template>

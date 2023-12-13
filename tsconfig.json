@@ -8,6 +8,7 @@
     "build"
   ],
   "compilerOptions": {
+    "allowJs": true,
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
@@ -34,7 +35,8 @@
       "@japa/preset-adonis/build/adonis-typings",
       "@eidellev/inertia-adonisjs",
       "@adonisjs/lucid",
-      "@adonisjs/auth"
+      "@adonisjs/auth",
+      "@adonisjs/ally"
     ]
   }
 }
