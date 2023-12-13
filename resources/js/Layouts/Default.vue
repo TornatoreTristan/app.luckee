@@ -32,7 +32,7 @@
                 class="absolute bg-white p-6 -translate-x-1/2 left-1/2 w-[200px] top-16 text-xs flex flex-col gap-4 rounded-lg"
               >
                 <li>
-                  <Link @click="handleNav" href="/dashboard">Dashboard</Link>
+                  <Link @click="handleNav" href="/">Dashboard</Link>
                 </li>
                 <li>
                   <Link @click="handleNav" href="/profile">Compte</Link>
@@ -54,10 +54,32 @@
     <div class="container-content">
       <slot></slot>
     </div>
-    <footer class="py-8">
-      <p class="text-slate-400 text-xs text-center">
-        2023 © Luckee est développé par Tristan TORNATORE
-      </p>
+    <footer class="container-content py-8">
+      <hr class="my-4" />
+      <div class="flex items-start justify-between">
+        <div class="w-6/12">
+          <h3>Logo</h3>
+          <p>© Tristan TORNATORE</p>
+          <p>Tous droits réservés</p>
+        </div>
+        <div class="3/12">
+          <h3>Luckee</h3>
+          <ul class="text-xs flex flex-col gap-1">
+            <li>Support</li>
+            <li>Légal</li>
+            <li>Termes d'utilisation</li>
+            <li>Confidentialité</li>
+          </ul>
+        </div>
+        <div class="3/12">
+          <h3>Social</h3>
+          <ul class="text-xs flex flex-col gap-1">
+            <li>LinkedIn</li>
+            <li>Twitter</li>
+            <li>Instagram</li>
+          </ul>
+        </div>
+      </div>
     </footer>
   </main>
 </template>

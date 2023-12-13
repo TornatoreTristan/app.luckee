@@ -20,14 +20,14 @@
           TT
         </div>
         <div>
-          <h3>
+          <h2>
             {{
               !$page.props.auth.user
                 ? 'Anonyme'
                 : $page.props.auth.user.first_name + ' ' + $page.props.auth.user.last_name
             }}
             <span class="text-gray-400 text-xs">● 1er</span>
-          </h3>
+          </h2>
           <p class="text-sm text-gray-400">Ceci est ta super baseline</p>
         </div>
       </div>
