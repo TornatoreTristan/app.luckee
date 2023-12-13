@@ -13,7 +13,7 @@ export default class OpenAisController {
         new OpenAI(String(process.env.OPENAI_API_KEY))
       : null
     const stream = await openai?.chat.completions.create({
-      model: 'gpt-4',
+      model: 'ft:gpt-3.5-turbo-0613:tristan-tornatore::81a0sIpH',
       messages: [
         { role: 'user', content: `rédige moi une publication linkedIn sur ce sujet ${prompt}` },
       ],
