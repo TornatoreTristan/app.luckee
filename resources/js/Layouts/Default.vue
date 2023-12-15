@@ -43,6 +43,9 @@
                   <Link @click="handleNav" href="/">Dashboard</Link>
                 </li>
                 <li>
+                  <Link @click="handleNav" href="/mes-publications">Mes publications</Link>
+                </li>
+                <li>
                   <Link @click="handleNav" href="/profile">Compte</Link>
                 </li>
                 <li>

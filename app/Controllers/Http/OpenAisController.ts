@@ -1,7 +1,46 @@
 import OpenAI from 'openai'
+import Post from 'App/Models/Post'
 
 export default class OpenAisController {
-  public async generateText({ request, response }) {
+  // Méthode pour générer un titre à partir du contenu
+  private generateTitle(content) {
+    const endingCharacters = ['.', '!', '?']
+    for (let i = 0; i < content.length; i++) {
+      if (endingCharacters.includes(content[i])) {
+        return content.substring(0, i + 1)
+      }
+    }
+    return content // Retourne le contenu complet si aucun caractère de fin n'est trouvé
+  }
+
+  // Méthode pour enregistrer une publication dans la base de données
+  private async savePost(content, userId, prompt, modelUsed) {
+    try {
+      const title = this.generateTitle(content)
+      const slug = title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+      const newPost = new Post()
+      newPost.fill({
+        title,
+        content,
+        userId,
+        status: 'draft', // Changez selon vos besoins
+        slug,
+        image: '', // À définir selon la logique de votre application
+        prompt,
+        model: modelUsed,
+      })
+      await newPost.save()
+      return newPost
+    } catch (error) {
+      console.error('Erreur lors de l’enregistrement du post:', error)
+      throw error // Ou gérez l'erreur selon votre logique d'application
+    }
+  }
+
+  public async generateText({ request, response, auth }) {
     response.response.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
@@ -45,10 +84,16 @@ export default class OpenAisController {
     if (!stream) {
       return response.badRequest({ error: 'erreur' })
     }
+    let content = ''
     for await (const chunk of stream) {
-      const content = chunk.choices[0]?.delta?.content || ''
+      content += chunk.choices[0]?.delta?.content || ''
       const formattedContent = `data: ${JSON.stringify(content)}\n\n`
       response.response.write(formattedContent)
     }
+
+    const user = auth.user
+    const userId = user?.id
+
+    await this.savePost(content, userId, prompt, model) // Enregistrement du post
   }
 }
