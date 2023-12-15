@@ -25,6 +25,7 @@ Route.get('/profile', async ({ inertia, auth }) => {
 Route.get('/nouvelle-publication', async ({ inertia }) => {
   return inertia.render('NewPost')
 }).middleware('auth')
+Route.get('/mes-publications', 'PostsListsController.getPosts').middleware('auth')
 
 /**
  * Auth Routes

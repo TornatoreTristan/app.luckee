@@ -86,7 +86,7 @@ const connectToStream = async () => {
   )
   eventSource.onmessage = (event) => {
     const text = JSON.parse(event.data)
-    generatedText.value += text
+    generatedText.value = text
   }
 }
 </script>

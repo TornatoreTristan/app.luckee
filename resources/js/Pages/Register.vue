@@ -2,57 +2,21 @@
   <div class="flex flex-col justify-center items-center">
     <h1>S'inscrire</h1>
     <div class="block-auth">
-      <form @submit.prevent="handleSubmit">
-        <div class="input-auth">
-          <label for="email">Votre email</label>
-          <input type="email" name="email" id="email" />
-        </div>
-        <div class="input-auth">
-          <label for="firstname">Votre prénom</label>
-          <input type="text" name="firstname" id="firstname" />
-        </div>
-        <div class="input-auth">
-          <label for="lastname">Votre nom</label>
-          <input type="text" name="lastname" id="lastname" />
-        </div>
-        <div class="input-auth">
-          <label for="password">Votre mot de passe</label>
-          <input type="password" name="password" id="password" />
-        </div>
-        <button class="btn" type="submit">S'inscrire</button>
-      </form>
-      <div>
-        <button @click="loginWithLinkedIn">Login with LinkedIn</button>
+      <CredentialAuthSignup />
+      <div class="my-4">
+        <hr class="my-8" />
+        <LinkedInAuth />
+      </div>
+      <div class="my-4 w-full text-center">
+        <hr class="my-4" />
+        <p>Vous avez déjà un compte ? <Link href="/login">Connectez-vous</Link></p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const handleSubmit = async () => {
-  const formData = new FormData()
-  formData.append('email', email.value)
-  formData.append('firstName', firstname.value)
-  formData.append('lastName', lastname.value)
-  formData.append('password', password.value)
-
-  try {
-    const response = await fetch('/signup', {
-      method: 'POST',
-      body: formData,
-    })
-    const data = await response.json()
-
-    if (response.ok) {
-      window.location.href = '/dashboard'
-    }
-    console.log(data)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-const loginWithLinkedIn = () => {
-  window.location.href = '/linkedin/redirect'
-}
+import { Link } from '@inertiajs/inertia-vue3'
+import LinkedInAuth from './../Components/Auth/LinkedInAuth.vue'
+import CredentialAuthSignup from './../Components/Auth/CredentialAuthSignup.vue'
 </script>

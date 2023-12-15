@@ -4,15 +4,51 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
+@font-face {
+  font-family: 'Satoshi-Bold';
+  src:
+    url('./fonts/Satoshi-Bold.woff2') format('woff2'),
+    url('./fonts/Satoshi-Bold.woff') format('woff'),
+    url('./fonts/Satoshi-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src:
+    url('./fonts/Satoshi-Medium.woff2') format('woff2'),
+    url('./fonts/Satoshi-Medium.woff') format('woff'),
+    url('./fonts/Satoshi-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-Regular';
+  src:
+    url('./fonts/Satoshi-Regular.woff2') format('woff2'),
+    url('./fonts/Satoshi-Regular.woff') format('woff'),
+    url('./fonts/Satoshi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
 @layer components {
   h1 {
     @apply text-xl font-bold text-gray-800 py-4;
   }
   p {
-    @apply text-gray-800 text-[14px];
+    @apply text-gray-800 text-sm;
   }
   a {
-    @apply text-gray-800 font-bold hover:text-blue-600;
+    @apply font-bold hover:text-blue-500 text-sm border-b border-blue-600 pb-0.5 text-blue-600;
+  }
+  header a {
+    @apply text-gray-800 text-sm border-none;
   }
   label {
     @apply text-gray-800 text-sm;
@@ -24,13 +60,13 @@
     @apply bg-neutral-50 bg-opacity-20 rounded-lg border-2 border-gray-200 w-6/12 p-16 mb-4;
   }
   .input-auth {
-    @apply pb-4 flex flex-col;
+    @apply pb-1 flex flex-col;
   }
   .input-auth input {
-    @apply py-2 px-4 rounded-lg text-xs border-gray-200 bg-transparent border focus:border-2 focus:outline-none focus:border-emerald-300 my-2;
+    @apply py-2 px-4 rounded text-xs border-gray-200 bg-transparent border focus:border-2 focus:outline-none focus:border-dark my-2;
   }
   .btn {
-    @apply bg-slate-600 text-white py-3 px-4 rounded text-xs font-bold;
+    @apply text-white py-3 my-2 px-4 rounded text-xs font-bold bg-dark w-full;
   }
   h3 {
     @apply text-lg font-bold text-gray-800 py-4;
@@ -46,17 +82,22 @@
 html,
 body {
   background-color: #f7f8fa;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Satoshi-Regular', sans-serif;
   color: #46444c;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Satoshi-Bold', sans-serif;
 }
 
 * {
   margin: 0;
   padding: 0;
-}
-
-p {
-  font-size: 14px;
 }
 
 header ul {
