@@ -68,6 +68,9 @@
   .btn {
     @apply text-white py-3 my-2 px-4 rounded text-xs font-bold bg-dark w-full;
   }
+  .btn-secondary {
+    @apply py-3 my-2 px-4 rounded text-xs font-bold border-slate-800 border-2 w-full;
+  }
   h3 {
     @apply text-lg font-bold text-gray-800 py-4;
   }
@@ -76,6 +79,9 @@
   }
   .container-content {
     @apply py-16 bg-slate-100 px-[12%] w-full;
+  }
+  .btn-danger {
+    @apply text-red-500 py-3 my-2 px-4 rounded text-xs font-bold bg-red-100 w-full border-2 border-red-500;
   }
 }
 

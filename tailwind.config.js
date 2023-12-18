@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['Satoshi-Regular', 'sans-serif'],
+      bold: ['Satoshi-Bold', 'sans-serif'],
     },
     fontSize: {
       '2xs': '0.625rem',
