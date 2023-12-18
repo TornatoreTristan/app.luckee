@@ -11,4 +11,13 @@ export default class PostsListsController {
       })
     }
   }
+
+  public async delete({ params, response }: HttpContextContract) {
+    const { id } = params
+    console.log(id)
+    const post = await Post.findOrFail(id)
+    console.log(post)
+    await post.delete()
+    return response.ok({ success: true })
+  }
 }

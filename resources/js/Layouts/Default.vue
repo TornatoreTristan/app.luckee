@@ -2,8 +2,10 @@
   <main>
     <header class="py-8">
       <nav class="flex items-center justify-between">
-        <div class="flex items-center">
-          <Link href="/">Logo</Link>
+        <div class="flex justify-start">
+          <Link href="/">
+            <img src="/logo-luckee.svg" alt="luckee logo" width="100px" height="50px" />
+          </Link>
         </div>
         <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center gap-8">
           <li>
@@ -69,7 +71,7 @@
       <hr class="my-4" />
       <div class="flex items-start justify-between">
         <div class="w-6/12">
-          <h3>Logo</h3>
+          <img src="/icon-luckee.svg" class="mb-8" alt="icon luckee" width="50px" height="50px" />
           <p class="text-xs mb-1">© Tristan TORNATORE</p>
           <p class="text-xs">Tous droits réservés</p>
         </div>
