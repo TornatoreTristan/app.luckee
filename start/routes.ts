@@ -82,3 +82,8 @@ Route.post('/logout', 'AuthController.Logout')
  * OpenAI
  */
 Route.get('/openai', 'OpenAisController.generateText')
+
+/**
+ * Posts Routes
+ */
+Route.delete('/posts/:id', 'PostsListsController.delete').middleware('auth')
