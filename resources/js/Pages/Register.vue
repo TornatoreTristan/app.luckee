@@ -2,9 +2,10 @@
   <div class="flex flex-col justify-center items-center">
     <h1>S'inscrire</h1>
     <div class="block-auth">
-      <CredentialAuthSignup />
+      <!-- <CredentialAuthSignup /> -->
       <div class="my-4">
-        <hr class="my-8" />
+        <h2 class="text-center">Connectez-vous avec votre compte LinkedIn</h2>
+        <hr class="my-2" />
         <LinkedInAuth />
       </div>
       <div class="my-4 w-full text-center">

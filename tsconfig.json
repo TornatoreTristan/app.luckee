@@ -36,7 +36,9 @@
       "@eidellev/inertia-adonisjs",
       "@adonisjs/lucid",
       "@adonisjs/auth",
-      "@adonisjs/ally"
+      "@adonisjs/ally",
+      "adonis5-scheduler",
+      "@adonisjs/mail"
     ]
   }
 }

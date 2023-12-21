@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from '../../Models/User'
+import EmailsController from './EmailsController'
 
 export default class AuthController {
   public async Register({ auth, request, response }: HttpContextContract) {
@@ -16,6 +17,8 @@ export default class AuthController {
     user.last_name = lastName
     await user.save()
     await auth.login(user)
+    const emailsController = new EmailsController()
+    await emailsController.sendWelcomeEmail(user)
     return response.ok({ user: user, isLoggedIn: true })
   }
 

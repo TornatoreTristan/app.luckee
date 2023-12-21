@@ -5,11 +5,18 @@ import User from 'App/Models/User'
  * Views Routes
  */
 
+Route.get('/support', async ({ inertia }) => {
+  return inertia.render('Support')
+})
+Route.get('/legal', async ({ inertia }) => {
+  return inertia.render('Legal')
+})
+
 Route.get('/', async ({ inertia, auth }) => {
   return inertia.render('Dashboard', {
     user: auth.user,
   })
-}).middleware('auth')
+}).middleware(['auth', 'shareUserPosts'])
 Route.get('/signup', async ({ inertia, auth }) => {
   console.log(auth.isLoggedIn)
   return inertia.render('Register')
@@ -87,3 +94,7 @@ Route.get('/openai', 'OpenAisController.generateText')
  * Posts Routes
  */
 Route.delete('/posts/:id', 'PostsListsController.delete').middleware('auth')
+Route.post('/posts/:id/schedule', 'PostsListsController.update').middleware('auth')
+Route.post('/posts/:id/publish', 'PublishToLinkedInsController.PublishToLinkedIn').middleware(
+  'auth'
+)

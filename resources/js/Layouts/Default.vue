@@ -4,7 +4,7 @@
       <nav class="flex items-center justify-between">
         <div class="flex justify-start">
           <Link href="/">
-            <img src="/logo-luckee.svg" alt="luckee logo" width="100px" height="50px" />
+            <img src="/logo-lukee.svg" alt="luckee logo" width="60px" height="50px" />
           </Link>
         </div>
         <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center gap-8">
@@ -18,9 +18,7 @@
         <div v-else class="flex justify-center items-center gap-8">
           <div class="relative flex gap-4 items-center" ref="menuRef">
             <Link href="/nouvelle-publication">
-              <button class="bg-slate-700 text-xs text-white py-2 px-4 rounded-lg font-bold">
-                Créer une nouvelle publication
-              </button>
+              <button class="btn">Créer une nouvelle publication</button>
             </Link>
             <div class="relative">
               <button
@@ -72,16 +70,16 @@
       <div class="flex items-start justify-between">
         <div class="w-6/12">
           <img src="/icon-luckee.svg" class="mb-8" alt="icon luckee" width="50px" height="50px" />
-          <p class="text-xs mb-1">© Tristan TORNATORE</p>
+          <p class="text-xs mb-1">© Tristan TORNATORE & Kélian LALLOUÉ</p>
           <p class="text-xs">Tous droits réservés</p>
         </div>
         <div class="3/12">
           <h3>Luckee</h3>
           <ul class="text-xs flex flex-col gap-1">
-            <li>Support</li>
-            <li>Légal</li>
-            <li>Termes d'utilisation</li>
-            <li>Confidentialité</li>
+            <Link class="text-gray-600 border-none font-sans" href="/support"
+              ><li>Support</li></Link
+            >
+            <Link class="text-gray-600 border-none font-sans" href="/legal"><li>Légal</li></Link>
           </ul>
         </div>
         <div class="3/12">

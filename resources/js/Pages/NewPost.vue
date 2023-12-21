@@ -9,6 +9,10 @@
           <label for="subject">Vous pensez à un sujet ? </label>
           <input v-model="prompt" type="text" id="subject" name="subject" />
         </div>
+        <div class="input-auth">
+          <label for="idea">Détaillez votre idée</label>
+          <textarea v-model="idea" type="textarea" id="idea" name="idea" />
+        </div>
         <div>
           <hr class="my-4" />
           <div>
@@ -17,6 +21,17 @@
               <div class="flex gap-2">
                 <ToggleButton v-model="pronomChoice" value="tutoiement">Tutoiement</ToggleButton>
                 <ToggleButton v-model="pronomChoice" value="vouvoiement">Vouvoiement</ToggleButton>
+              </div>
+            </div>
+            <div>
+              <h4>Tonalité</h4>
+              <div class="flex flex-wrap gap-2">
+                <ToggleButton v-model="tone" value="normal">Standard</ToggleButton>
+                <ToggleButton v-model="tone" value="pedagogique">Pédagogique</ToggleButton>
+                <ToggleButton v-model="tone" value="Humour">Humour</ToggleButton>
+                <ToggleButton v-model="tone" value="coup de gueule">Coup de gueule</ToggleButton>
+                <ToggleButton v-model="tone" value="Build in public">Build in public</ToggleButton>
+                <ToggleButton v-model="tone" value="Personnel">Personnel</ToggleButton>
               </div>
             </div>
             <div class="mt-4">
@@ -77,12 +92,14 @@ import { ref } from 'vue'
 import ToggleButton from './../Components/Forms/ToggleButton.vue'
 
 const prompt = ref('')
+const idea = ref('')
 const generatedText = ref('')
+const tone = ref('normal')
 const pronomChoice = ref('tutoiement')
 const modelChoice = ref('luckee-ft')
 const connectToStream = async () => {
   const eventSource = new EventSource(
-    `/openai?prompt=${prompt.value}&pronom=${pronomChoice.value}&model=${modelChoice.value}`
+    `/openai?prompt=${prompt.value}&pronom=${pronomChoice.value}&model=${modelChoice.value}&tone=${tone.value}&idea=${idea.value}`
   )
   eventSource.onmessage = (event) => {
     const text = JSON.parse(event.data)
