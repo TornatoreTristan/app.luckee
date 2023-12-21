@@ -36,7 +36,7 @@ const handleSubmit = async () => {
     const data = await response.json()
 
     if (response.ok) {
-      window.location.href = '/dashboard'
+      window.location.href = '/'
     }
     console.log(data)
   } catch (error) {

@@ -12,11 +12,20 @@ export default class PostsListsController {
     }
   }
 
+  public async update({ request, response, params }: HttpContextContract) {
+    const { id } = params
+    const publishDate = request.input('publishDate')
+    const status = request.input('status')
+    const post = await Post.findOrFail(id)
+    post.publishAt = publishDate
+    post.status = status
+    await post.save()
+    return response.ok({ success: true })
+  }
+
   public async delete({ params, response }: HttpContextContract) {
     const { id } = params
-    console.log(id)
     const post = await Post.findOrFail(id)
-    console.log(post)
     await post.delete()
     return response.ok({ success: true })
   }

@@ -5,7 +5,9 @@
     "@adonisjs/core/build/commands/index.js",
     "@adonisjs/repl/build/commands",
     "@eidellev/inertia-adonisjs/build/commands",
-    "@adonisjs/lucid/build/commands"
+    "@adonisjs/lucid/build/commands",
+    "adonis5-scheduler/build/commands",
+    "@adonisjs/mail/build/commands"
   ],
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
@@ -33,7 +35,9 @@
     "@eidellev/inertia-adonisjs",
     "@adonisjs/lucid",
     "@adonisjs/auth",
-    "@adonisjs/ally"
+    "@adonisjs/ally",
+    "adonis5-scheduler",
+    "@adonisjs/mail"
   ],
   "metaFiles": [
     {

@@ -44,4 +44,5 @@ Server.middleware.register([
 */
 Server.middleware.registerNamed({
   auth: () => import('./../app/Middleware/Auth'),
+  shareUserPosts: () => import('../app/Middleware/ShareUserPosts'),
 })
