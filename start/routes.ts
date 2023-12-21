@@ -5,6 +5,13 @@ import User from 'App/Models/User'
  * Views Routes
  */
 
+Route.get('/support', async ({ inertia }) => {
+  return inertia.render('Support')
+})
+Route.get('/legal', async ({ inertia }) => {
+  return inertia.render('Legal')
+})
+
 Route.get('/', async ({ inertia, auth }) => {
   return inertia.render('Dashboard', {
     user: auth.user,
