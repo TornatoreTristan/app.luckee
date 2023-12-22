@@ -27,7 +27,7 @@ const allyConfig: AllyConfig = {
     driver: 'linkedin',
     clientId: Env.get('LINKEDIN_CLIENT_ID'),
     clientSecret: Env.get('LINKEDIN_CLIENT_SECRET'),
-    callbackUrl: '/linkedin/callback',
+    callbackUrl: Env.get('APP_URL') + '/linkedin/callback',
     scopes: ['r_liteprofile', 'r_emailaddress', 'w_member_social'],
   },
 }
