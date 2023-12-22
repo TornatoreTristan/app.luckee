@@ -5,7 +5,7 @@ import User from 'App/Models/User'
 
 export default class LinkedInPostsScheduler extends BaseTask {
   public static get schedule() {
-    return CronTimeV2.everySecond()
+    return CronTimeV2.everyMinute()
   }
 
   public static get useLock() {
