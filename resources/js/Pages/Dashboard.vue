@@ -3,7 +3,7 @@
     <h1>Dashboard</h1>
     <hr class="mb-4" />
     <div>
-      <p>Bienvenue sur votre dashboard {{ user.first_name + ' ' + user.last_name }}</p>
+      <p>Hello {{ user.first_name + ' ' + user.last_name }} !</p>
     </div>
     <div class="flex gap-4 mt-8">
       <div class="bg-white p-8 w-6/12">
