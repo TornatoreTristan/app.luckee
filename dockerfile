@@ -9,6 +9,7 @@ RUN npm install
 COPY . .
 
 RUN node ace build --production
+RUN node ace schedule:run
 
 EXPOSE 3333
 
