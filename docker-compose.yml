@@ -33,4 +33,10 @@ services:
       APP_URL: ${APP_URL}
     volumes:
       - .:/app
-    command: node build/server.js && node ace scheduler:run
+    command: >
+      /bin/sh -c "
+      echo 'Starting server...';
+      node build/server.js &
+      echo 'Starting scheduler...';
+      node ace scheduler:run;
+      "
