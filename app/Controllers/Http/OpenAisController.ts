@@ -2,6 +2,7 @@ import OpenAI from 'openai'
 import Post from 'App/Models/Post'
 
 export default class OpenAisController {
+  private isGenerating = false
   // Méthode pour générer un titre à partir du contenu
   private generateTitle(content) {
     const endingCharacters = ['.', '!', '?']
@@ -43,6 +44,14 @@ export default class OpenAisController {
   }
 
   public async generateText({ request, response, auth }) {
+    if (this.isGenerating) {
+      return response
+        .status(429)
+        .send('Un processus de génération est déjà en cours. Veuillez réessayer plus tard.')
+    }
+
+    this.isGenerating = true
+
     response.response.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
@@ -98,5 +107,6 @@ export default class OpenAisController {
     const userId = user?.id
 
     await this.savePost(content, userId, prompt, model, idea, tone) // Enregistrement du post
+    this.isGenerating = false
   }
 }

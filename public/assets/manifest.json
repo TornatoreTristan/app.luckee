@@ -1,0 +1,13 @@
+{
+  "assets/app.css": "http://localhost:8080/assets/app.css",
+  "assets/app.js": "http://localhost:8080/assets/app.js",
+  "assets/fonts/Satoshi-Medium.ttf": "http://localhost:8080/assets/fonts/Satoshi-Medium.75956208.ttf",
+  "assets/fonts/Satoshi-Regular.ttf": "http://localhost:8080/assets/fonts/Satoshi-Regular.fe762acc.ttf",
+  "assets/fonts/Satoshi-Bold.ttf": "http://localhost:8080/assets/fonts/Satoshi-Bold.137a52d9.ttf",
+  "assets/fonts/Satoshi-Medium.woff": "http://localhost:8080/assets/fonts/Satoshi-Medium.2419b46c.woff",
+  "assets/fonts/Satoshi-Regular.woff": "http://localhost:8080/assets/fonts/Satoshi-Regular.ca3da5fd.woff",
+  "assets/fonts/Satoshi-Bold.woff": "http://localhost:8080/assets/fonts/Satoshi-Bold.a875ff68.woff",
+  "assets/fonts/Satoshi-Medium.woff2": "http://localhost:8080/assets/fonts/Satoshi-Medium.1ffe9682.woff2",
+  "assets/fonts/Satoshi-Regular.woff2": "http://localhost:8080/assets/fonts/Satoshi-Regular.9ec05085.woff2",
+  "assets/fonts/Satoshi-Bold.woff2": "http://localhost:8080/assets/fonts/Satoshi-Bold.a0e6d255.woff2"
+}
