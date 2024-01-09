@@ -10,6 +10,12 @@ export default class User extends BaseModel {
   public role: string
 
   @column()
+  public credits: number | null
+
+  @column()
+  public subscription: string | null
+
+  @column()
   public first_name: string
 
   @column()
