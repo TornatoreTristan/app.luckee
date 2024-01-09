@@ -44,6 +44,9 @@
                 v-if="isMenuIsVisible"
                 class="absolute bg-white p-6 -translate-x-1/2 left-1/2 w-[200px] top-16 text-xs flex flex-col gap-4 rounded-lg"
               >
+                <li v-show="$page.props.auth.user.role === 'admin'">
+                  <Link @click="handleNav" href="/admin">Panel d'aministration</Link>
+                </li>
                 <li>
                   <Link @click="handleNav" href="/">Dashboard</Link>
                 </li>
