@@ -2,10 +2,15 @@
   <main>
     <header class="py-8">
       <nav class="flex items-center justify-between">
-        <div class="flex justify-start">
+        <div class="flex items-end gap-3">
           <Link href="/">
             <img src="/logo-lukee.svg" alt="luckee logo" width="60px" height="50px" />
           </Link>
+          <div
+            class="px-2 flex justify-center items-center bg-emerald-100 text-emerald-600 rounded-lg text-xs font-bold"
+          >
+            beta-0.3
+          </div>
         </div>
         <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center gap-8">
           <li>

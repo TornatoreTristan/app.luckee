@@ -6,7 +6,7 @@
     <p>Raison sociale : Tristan TORNATORE</p>
     <p>Statut juridique : Auto-entrepreneur</p>
     <p>Siège social : 142 rue des sources, 14200 Hérouville Saint Clair, FRANCE</p>
-    <p>RCS : Strasbourg</p>
+    <p>RCS : Caen</p>
     <p>Siret : 82183322500039</p>
     <p>Numéro de TVA intracommunautaire : FR 53821833225</p>
     <h2 class="py-2">Directeur de la publication</h2>

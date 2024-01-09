@@ -12,6 +12,8 @@ Route.get('/legal', async ({ inertia }) => {
   return inertia.render('Legal')
 })
 
+Route.get('/admin', 'AdminsController.getAllUser').middleware('isAdmin')
+
 Route.get('/', async ({ inertia, auth }) => {
   return inertia.render('Dashboard', {
     user: auth.user,
