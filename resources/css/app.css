@@ -87,6 +87,16 @@
   .btn-danger {
     @apply text-red-500 py-3 my-2 px-4 rounded text-xs font-bold bg-red-100 w-full border-2 border-red-500;
   }
+  td,
+  th {
+    @apply py-4 px-6 text-sm text-gray-800;
+  }
+  tr {
+    @apply border-b border-gray-200 hover:bg-gray-50;
+  }
+  table {
+    @apply min-w-full rounded-lg overflow-hidden border border-gray-200;
+  }
 }
 
 html,

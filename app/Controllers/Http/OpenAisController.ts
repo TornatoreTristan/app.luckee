@@ -1,5 +1,6 @@
 import OpenAI from 'openai'
 import Post from 'App/Models/Post'
+import User from 'App/Models/User'
 
 export default class OpenAisController {
   private isGenerating = false
@@ -17,11 +18,14 @@ export default class OpenAisController {
   // Méthode pour enregistrer une publication dans la base de données
   private async savePost(content, userId, prompt, modelUsed, idea, tone) {
     try {
-      const title = this.generateTitle(content)
+      let title = this.generateTitle(content)
       const slug = title
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '')
+      if (title.length > 255) {
+        title = title.substring(0, 255)
+      }
       const newPost = new Post()
       newPost.fill({
         title,
@@ -36,6 +40,12 @@ export default class OpenAisController {
         model: modelUsed,
       })
       await newPost.save()
+      // Décrémente le nombre de crédits de l'utilisateur
+      const user = await User.findOrFail(userId)
+      if (user.credits) {
+        user.credits = user.credits - 1
+      }
+      await user.save()
       return newPost
     } catch (error) {
       console.error('Erreur lors de l’enregistrement du post:', error)
