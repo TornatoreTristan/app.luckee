@@ -17,12 +17,21 @@
       </p>
       <p class="font-bold">Publications générées</p>
     </div>
+    <div
+      class="bg-white p-8 border-2 border-slate-200 rounded-xl flex flex-col justify-center items-center"
+    >
+      <p>
+        <span class="text-xl">{{ Math.round(posts.length * 0.025) }} €</span>
+      </p>
+      <p class="font-bold">Coût estimé (openAI)</p>
+    </div>
   </div>
   <table class="table-auto w-full">
     <thead>
       <tr class="text-left">
         <th>Utilisateur</th>
         <th>Email</th>
+        <th>Posts crées</th>
         <th>Crédits</th>
         <th>Date d'inscription</th>
         <th class="text-center">Actions</th>
@@ -38,6 +47,7 @@
           </a>
         </td>
         <td>{{ user.email }}</td>
+        <td>{{ countPostByUser(user.id) }}</td>
         <td>{{ user.credits }}</td>
         <td><DateFormat :date="user.created_at" /></td>
         <td class="text-center">
@@ -56,4 +66,8 @@ import { ref } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 
 const { users, posts } = usePage().props.value
+
+const countPostByUser = (userId) => {
+  return posts.filter((post) => post.user_id === userId).length
+}
 </script>
