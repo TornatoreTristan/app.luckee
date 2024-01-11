@@ -3,7 +3,7 @@
     <h1>Créer une publication</h1>
   </div>
   <div class="flex gap-8 justify-between">
-    <div class="bg-neutral-50 bg-opacity-20 rounded-lg border-2 border-gray-200 w-6/12 p-16 mb-4">
+    <div class="bg-neutral-50 rounded-lg border-2 border-gray-200 w-6/12 p-16 mb-4">
       <form @submit.prevent="connectToStream">
         <div class="input-auth">
           <label for="subject">Vous pensez à un sujet ? </label>
@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        <button class="btn mt-12">Générer une publication</button>
+        <button class="btn mt-12" :disabled="isLoading">Générer une publication</button>
       </form>
     </div>
     <div class="rounded-lg bg-white border border-gray-200 w-6/12 p-6">
@@ -97,13 +97,24 @@ const generatedText = ref('')
 const tone = ref('normal')
 const pronomChoice = ref('tutoiement')
 const modelChoice = ref('luckee-ft')
+const isLoading = ref(false)
+
 const connectToStream = async () => {
+  isLoading.value = true
   const eventSource = new EventSource(
     `/openai?prompt=${prompt.value}&pronom=${pronomChoice.value}&model=${modelChoice.value}&tone=${tone.value}&idea=${idea.value}`
   )
   eventSource.onmessage = (event) => {
-    const text = JSON.parse(event.data)
-    generatedText.value = text
+    const data = JSON.parse(event.data)
+
+    // Vérifiez si le statut 'completed' a été envoyé
+    if (data.status && data.status === 'completed') {
+      isLoading.value = false
+      eventSource.close()
+    } else {
+      // Traitement normal des données
+      generatedText.value = data
+    }
   }
 }
 </script>

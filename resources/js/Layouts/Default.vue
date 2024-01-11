@@ -21,6 +21,14 @@
           </li>
         </ul>
         <div v-else class="flex justify-center items-center gap-8">
+          <div>
+            <Link
+              class="flex gap-3 bg-blue-100 rounded-lg py-3 px-4"
+              href="https://lukee.canny.io/"
+            >
+              <img src="map.svg" width="15" alt="" /> Roadmap
+            </Link>
+          </div>
           <div class="relative flex gap-4 items-center" ref="menuRef">
             <Link href="/nouvelle-publication">
               <button class="btn">Créer une nouvelle publication</button>
