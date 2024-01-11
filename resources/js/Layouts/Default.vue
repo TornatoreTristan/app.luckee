@@ -9,7 +9,7 @@
           <div
             class="px-2 flex justify-center items-center bg-emerald-100 text-emerald-600 rounded-lg text-xs font-bold"
           >
-            beta-0.3
+            beta-0.4
           </div>
         </div>
         <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center gap-8">
@@ -21,6 +21,14 @@
           </li>
         </ul>
         <div v-else class="flex justify-center items-center gap-8">
+          <div>
+            <Link
+              class="flex gap-3 bg-blue-100 rounded-lg py-3 px-4"
+              href="https://lukee.canny.io/"
+            >
+              <img src="map.svg" width="15" alt="" /> Roadmap
+            </Link>
+          </div>
           <div class="relative flex gap-4 items-center" ref="menuRef">
             <Link href="/nouvelle-publication">
               <button class="btn">Créer une nouvelle publication</button>
@@ -114,23 +122,6 @@ const handleNav = () => {
   isMenuIsVisible.value = !isMenuIsVisible.value
 }
 
-// Add Tawkto
-// const addTawkTo = () => {
-//   const script = document.createElement('script')
-//   script.textContent = `
-//     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-//     (function(){
-//     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-//     s1.async=true;
-//     s1.src='https://embed.tawk.to/659d52890ff6374032be1b0d/1hjn8kqak';
-//     s1.charset='UTF-8';
-//     s1.setAttribute('crossorigin','*');
-//     s0.parentNode.insertBefore(s1,s0);
-//     })();
-//   `
-//   document.head.appendChild(script)
-// }
-
 const handleClickOutside = (event) => {
   if (menuRef.value && !menuRef.value.contains(event.target)) {
     isMenuIsVisible.value = false
@@ -139,7 +130,6 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
   window.addEventListener('click', handleClickOutside)
-  // addTawkTo()
 })
 
 onUnmounted(() => {

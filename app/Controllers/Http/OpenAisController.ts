@@ -4,7 +4,6 @@ import User from 'App/Models/User'
 
 export default class OpenAisController {
   private isGenerating = false
-  // Méthode pour générer un titre à partir du contenu
   private generateTitle(content) {
     const endingCharacters = ['.', '!', '?']
     for (let i = 0; i < content.length; i++) {
@@ -12,7 +11,7 @@ export default class OpenAisController {
         return content.substring(0, i + 1)
       }
     }
-    return content // Retourne le contenu complet si aucun caractère de fin n'est trouvé
+    return content
   }
 
   // Méthode pour enregistrer une publication dans la base de données
@@ -113,10 +112,13 @@ export default class OpenAisController {
       response.response.write(formattedContent)
     }
 
+    const endMessage = `data: ${JSON.stringify({ status: 'completed' })}\n\n`
+    response.response.write(endMessage)
+
     const user = auth.user
     const userId = user?.id
 
-    await this.savePost(content, userId, prompt, model, idea, tone) // Enregistrement du post
+    await this.savePost(content, userId, prompt, model, idea, tone)
     this.isGenerating = false
   }
 }
