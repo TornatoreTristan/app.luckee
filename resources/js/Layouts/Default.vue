@@ -9,7 +9,7 @@
           <div
             class="px-2 flex justify-center items-center bg-emerald-100 text-emerald-600 rounded-lg text-xs font-bold"
           >
-            beta-0.3
+            beta-0.4
           </div>
         </div>
         <ul v-if="!$page.props.auth.isLoggedIn" class="flex items-center gap-8">
