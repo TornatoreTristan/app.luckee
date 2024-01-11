@@ -114,23 +114,6 @@ const handleNav = () => {
   isMenuIsVisible.value = !isMenuIsVisible.value
 }
 
-// Add Tawkto
-// const addTawkTo = () => {
-//   const script = document.createElement('script')
-//   script.textContent = `
-//     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-//     (function(){
-//     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-//     s1.async=true;
-//     s1.src='https://embed.tawk.to/659d52890ff6374032be1b0d/1hjn8kqak';
-//     s1.charset='UTF-8';
-//     s1.setAttribute('crossorigin','*');
-//     s0.parentNode.insertBefore(s1,s0);
-//     })();
-//   `
-//   document.head.appendChild(script)
-// }
-
 const handleClickOutside = (event) => {
   if (menuRef.value && !menuRef.value.contains(event.target)) {
     isMenuIsVisible.value = false
@@ -139,7 +122,6 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
   window.addEventListener('click', handleClickOutside)
-  // addTawkTo()
 })
 
 onUnmounted(() => {
