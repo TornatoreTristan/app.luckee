@@ -44,6 +44,7 @@
                 <ToggleButton v-model="modelChoice" value="gpt-3">GPT-3.5</ToggleButton>
                 <ToggleButton v-model="modelChoice" value="gpt-4">GPT-4</ToggleButton>
                 <ToggleButton v-model="modelChoice" value="luckee-ft">Luckee</ToggleButton>
+                <ToggleButton v-model="modelChoice" value="Mistral">MistralAI</ToggleButton>
               </div>
             </div>
           </div>

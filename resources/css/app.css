@@ -70,7 +70,7 @@
     @apply h-32;
   }
   .btn {
-    @apply text-white py-3 my-2 px-4 rounded text-xs font-bold bg-dark w-full;
+    @apply text-white py-3 my-2 px-4 rounded text-xs font-bold bg-[#f24957] w-full;
   }
   .btn-secondary {
     @apply py-3 my-2 px-4 rounded text-xs font-bold border-slate-800 border-2 w-full;
