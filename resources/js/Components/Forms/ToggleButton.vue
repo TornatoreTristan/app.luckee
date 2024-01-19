@@ -2,7 +2,7 @@
   <button
     type="button"
     @click="toggle"
-    :class="isChecked ? 'bg-emerald-400 text-white' : 'text-black'"
+    :class="isChecked ? 'bg-[#f24957] text-white' : 'text-black'"
     class="cursor-pointer px-4 py-2 border border-gray-300 rounded text-xs"
   >
     <slot></slot>
