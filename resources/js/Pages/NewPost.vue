@@ -4,7 +4,42 @@
   </div>
   <div class="flex gap-8 flex-col md:flex-row justify-between">
     <div class="bg-neutral-50 rounded-lg border-2 p-6 border-gray-200 md:w-6/12 md:p-16 mb-4">
-      <form @submit.prevent="connectToStream">
+      <div v-if="$page.props.auth.user.credits === 0" class="flex flex-col gap-4">
+        <h2>Oops ! 🤖</h2>
+        <p>Il semble que vous ayez consommé tous vos crédits pour aujourd'hui</p>
+        <p class="font-bold">
+          Nous limitons la génération de publications à 10 / jour / utilisateur
+        </p>
+        <h3>Pourquoi lukee limite la génération de publications par utilisateur ?</h3>
+        <p>
+          Ce n'est un secret pour personne. Lukee s'appuie sur l'API d'openAI avec un modèle
+          personnalisé pour fonctionner. Le fait de personnaliser le modèle nous permet de limiter
+          considérablement les coûts et d'avoir des résultats plus performants et humain que le
+          modèle de chatGPT4. Néanmoins, chaque fois que vous générez une publication, OpenAI
+          facture le coût de l'appel à son API.
+        </p>
+        <p>
+          Jusqu'à maintenant, nous souhaitions vous offrir en illimité notre outil pour vous
+          permettre de le tester tout en nous offrant la possibilité de l'améliorer.
+        </p>
+        <p>
+          Vos retours positifs nous encouragent fortement à continuer le développement de Lukee. Et
+          pour le rendre durable et toujours plus performants, nous planchons sur la meilleure
+          manière de rentabiliser l'application.
+        </p>
+        <p>
+          En attendant de trouver le modèle le plus pertinent pour vous, nous vous permettons un
+          usage entièrement gratuit bien que plus limité sans nous ruiner (et oui ! Vous êtes
+          désormais 200 🎉). Nous pensons qu'avec 10 crédits journalier, vous avez la flexibilité de
+          continuer votre progression fulgurante de l'algorithme de LinkedIn !
+        </p>
+        <p class="font-bold">
+          Si vous avez des idées pour nous aider à trouver un modèle économique qui vous convienne,
+          n'hésitez pas à nous contacter à l'adresse suivante :
+          <a href="mailto:tristan@lukee.io">tristan@lukee.io</a>
+        </p>
+      </div>
+      <form v-else @submit.prevent="connectToStream">
         <div class="input-auth">
           <label for="subject">Vous pensez à un sujet ? </label>
           <input v-model="prompt" type="text" id="subject" name="subject" />
