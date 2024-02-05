@@ -2,8 +2,8 @@
   <div>
     <h1>Créer une publication</h1>
   </div>
-  <div class="flex gap-8 justify-between">
-    <div class="bg-neutral-50 rounded-lg border-2 border-gray-200 w-6/12 p-16 mb-4">
+  <div class="flex gap-8 flex-col md:flex-row justify-between">
+    <div class="bg-neutral-50 rounded-lg border-2 p-6 border-gray-200 md:w-6/12 md:p-16 mb-4">
       <form @submit.prevent="connectToStream">
         <div class="input-auth">
           <label for="subject">Vous pensez à un sujet ? </label>
@@ -40,7 +40,7 @@
                 Le model d'entraînemnt utilisé par l'IA. Luckee est un modèle entraîné par nos soins
                 sur plus de 400 publications linkedIn soigneusement choisies.
               </p>
-              <div class="flex gap-2">
+              <div class="flex flex-wrap gap-2">
                 <ToggleButton v-model="modelChoice" value="gpt-3">GPT-3.5</ToggleButton>
                 <ToggleButton v-model="modelChoice" value="gpt-4">GPT-4</ToggleButton>
                 <ToggleButton v-model="modelChoice" value="luckee-ft">Luckee</ToggleButton>
@@ -52,7 +52,7 @@
         <button class="btn mt-12" :disabled="isLoading">Générer une publication</button>
       </form>
     </div>
-    <div class="rounded-lg bg-white border border-gray-200 w-6/12 p-6">
+    <div class="rounded-lg bg-white border border-gray-200 md:w-6/12 p-6">
       <div class="flex gap-4 items-center">
         <div
           class="bg-gray-600 rounded-full border border-gray-200 w-[60px] h-[60px] flex justify-center items-center text-white"

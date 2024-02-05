@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-center text-center md:text-left items-center">
     <h1>S'inscrire</h1>
     <div class="block-auth">
       <!-- <CredentialAuthSignup /> -->

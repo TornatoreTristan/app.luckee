@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Historique de mes publications</h1>
-    <div class="flex gap-4">
-      <div class="w-1/4">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="md:w-1/4">
         <div class="flex flex-col gap-1" v-if="posts.length > 0">
           <div
             v-for="post in posts"
@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="w-2/4 bg-white p-8">
+      <div class="md:w-2/4 bg-white p-8">
         <div v-if="selectedPost" :key="selectedPost.id">
           <p class="whitespace-pre-line">{{ selectedPost.content }}</p>
           <hr class="mt-8" />
@@ -49,7 +49,7 @@
           <p>Sélectionnez une publication pour afficher son contenu.</p>
         </div>
       </div>
-      <div class="bg-white p-4 w-1/4">
+      <div class="bg-white p-4 md:w-1/4">
         <h2>Paramètres</h2>
         <div v-if="selectedPost">
           <button
