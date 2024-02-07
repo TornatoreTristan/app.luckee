@@ -1,5 +1,14 @@
 {
   "commands": {
+    "updateUserCredits": {
+      "settings": {},
+      "commandPath": "./commands/UpdateUsersCredits",
+      "commandName": "updateUserCredits",
+      "description": "Update user credits daily",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
     "dump:rcfile": {
       "settings": {},
       "commandPath": "@adonisjs/core/build/commands/DumpRc",

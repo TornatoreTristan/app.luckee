@@ -2,9 +2,44 @@
   <div>
     <h1>Créer une publication</h1>
   </div>
-  <div class="flex gap-8 justify-between">
-    <div class="bg-neutral-50 rounded-lg border-2 border-gray-200 w-6/12 p-16 mb-4">
-      <form @submit.prevent="connectToStream">
+  <div class="flex gap-8 flex-col md:flex-row justify-between">
+    <div class="bg-neutral-50 rounded-lg border-2 p-6 border-gray-200 md:w-6/12 md:p-16 mb-4">
+      <div v-if="$page.props.auth.user.credits === 0" class="flex flex-col gap-4">
+        <h2>Oops ! 🤖</h2>
+        <p>Il semble que vous ayez consommé tous vos crédits pour aujourd'hui</p>
+        <p class="font-bold">
+          Nous limitons la génération de publications à 10 / jour / utilisateur
+        </p>
+        <h3>Pourquoi lukee limite la génération de publications par utilisateur ?</h3>
+        <p>
+          Ce n'est un secret pour personne. Lukee s'appuie sur l'API d'openAI avec un modèle
+          personnalisé pour fonctionner. Le fait de personnaliser le modèle nous permet de limiter
+          considérablement les coûts et d'avoir des résultats plus performants et humain que le
+          modèle de chatGPT4. Néanmoins, chaque fois que vous générez une publication, OpenAI
+          facture le coût de l'appel à son API.
+        </p>
+        <p>
+          Jusqu'à maintenant, nous souhaitions vous offrir en illimité notre outil pour vous
+          permettre de le tester tout en nous offrant la possibilité de l'améliorer.
+        </p>
+        <p>
+          Vos retours positifs nous encouragent fortement à continuer le développement de Lukee. Et
+          pour le rendre durable et toujours plus performants, nous planchons sur la meilleure
+          manière de rentabiliser l'application.
+        </p>
+        <p>
+          En attendant de trouver le modèle le plus pertinent pour vous, nous vous permettons un
+          usage entièrement gratuit bien que plus limité sans nous ruiner (et oui ! Vous êtes
+          désormais 200 🎉). Nous pensons qu'avec 10 crédits journalier, vous avez la flexibilité de
+          continuer votre progression fulgurante de l'algorithme de LinkedIn !
+        </p>
+        <p class="font-bold">
+          Si vous avez des idées pour nous aider à trouver un modèle économique qui vous convienne,
+          n'hésitez pas à nous contacter à l'adresse suivante :
+          <a href="mailto:tristan@lukee.io">tristan@lukee.io</a>
+        </p>
+      </div>
+      <form v-else @submit.prevent="connectToStream">
         <div class="input-auth">
           <label for="subject">Vous pensez à un sujet ? </label>
           <input v-model="prompt" type="text" id="subject" name="subject" />
@@ -40,11 +75,11 @@
                 Le model d'entraînemnt utilisé par l'IA. Luckee est un modèle entraîné par nos soins
                 sur plus de 400 publications linkedIn soigneusement choisies.
               </p>
-              <div class="flex gap-2">
+              <div class="flex flex-wrap gap-2">
                 <ToggleButton v-model="modelChoice" value="gpt-3">GPT-3.5</ToggleButton>
                 <ToggleButton v-model="modelChoice" value="gpt-4">GPT-4</ToggleButton>
                 <ToggleButton v-model="modelChoice" value="luckee-ft">Luckee</ToggleButton>
-                <ToggleButton v-model="modelChoice" value="Mistral">MistralAI</ToggleButton>
+                <!-- <ToggleButton v-model="modelChoice" value="mixtral8x7b">Mistral AI</ToggleButton> -->
               </div>
             </div>
           </div>
@@ -52,7 +87,7 @@
         <button class="btn mt-12" :disabled="isLoading">Générer une publication</button>
       </form>
     </div>
-    <div class="rounded-lg bg-white border border-gray-200 w-6/12 p-6">
+    <div class="rounded-lg bg-white border border-gray-200 md:w-6/12 p-6">
       <div class="flex gap-4 items-center">
         <div
           class="bg-gray-600 rounded-full border border-gray-200 w-[60px] h-[60px] flex justify-center items-center text-white"

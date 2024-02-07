@@ -1,6 +1,7 @@
 import OpenAI from 'openai'
 import Post from 'App/Models/Post'
 import User from 'App/Models/User'
+// import MistralClient from '@mistralai/mistralai'
 
 export default class OpenAisController {
   private isGenerating = false
@@ -76,9 +77,29 @@ export default class OpenAisController {
           return 'gpt-4'
         case 'luckee-ft':
           return 'ft:gpt-3.5-turbo-0613:tristan-tornatore::81a0sIpH'
+        case 'mixtral8x7b':
+          return ''
       }
     }
+    // Completion w/ Mistral AI
+    // if (model === 'mixtral8x7b') {
+    //   const apiKey = process.env.MISTRAL_API_KEY
+    //   const client = new MistralClient(apiKey)
+    //   const chatStreamResponse = await client.chatStream({
+    //     model: 'mistral-tiny',
+    //     messages: [{ role: 'user', content: 'What is the best French cheese?' }],
+    //   })
 
+    //   console.log('Chat Stream:')
+    //   for await (const chunk of chatStreamResponse) {
+    //     if (chunk.choices[0].delta.content !== undefined) {
+    //       const streamText = chunk.choices[0].delta.content
+    //       process.stdout.write(streamText)
+    //     }
+    //   }
+    //   console.log('Mistral AI')
+    // } else {
+    // Completion w/ OPENAI
     const openai = process.env.OPENAI_API_KEY
       ? // @ts-ignore
         new OpenAI(String(process.env.OPENAI_API_KEY))
@@ -92,8 +113,8 @@ export default class OpenAisController {
         {
           role: 'system',
           content: `
-        Tu es redacteur de publicagtion Linkedin, tu es crée des publications parfaitement virales à partir de simples indications. Tu respectes le processus suivant pour rédiger tes publications : \n\n 1. Analyse des indications Définir le sujet principal de l\'article. Identifier le problème à résoudre ou le point de discussion principal. Déterminer le public cible de l\'article. Choisir le ton de voix à adopter (inspirant, provocateur, informatif, autobiographique, etc.). Formuler une accroche captivante pour démarrer l\'article. \n\n 2.Élaboration du contenu : Relater une histoire ou une expérience personnelle si cela convient au ton et au sujet. Les histoires personnelles suscitent l\'émotion et l\'engagement. Utiliser des listes ou des énumérations pour hiérarchiser les points ou pour offrir une lecture facile. Inclure des éléments visuels comme des emojis, des caractères gras ou italiques, ou des sauts de ligne pour rendre le contenu attrayant et facile à lire. Mettre en avant des phrases impactantes qui peuvent servir de citations ou de moments de réflexion pour le lecteur. \n\n 3. Inclusion d\'un appel à l\'action ou d\'une conclusion : Inciter les lecteurs à réfléchir, à partager leur propre expérience, à commenter, ou à partager le post. Résumer le message clé ou la leçon principale à retenir.\n\n 4.Révision et ajustement : Relire le post pour s\'assurer de sa fluidité et de sa cohérence. Vérifier que le contenu correspond bien aux indications fournies et ajuster si nécessaire. \n\n 5.Livraison : Fournir le post finalisé, prêt à être publié sur LinkedIn. Ce que tu n'as pas le droit de faire : Saluer les gens, dire bonjour ... . Te présenter. Faire des fautes d'orthographe. Faire des fautes de grammaire. Faire des fautes de syntaxe. Faire des fautes de ponctuation. Faire des fautes de conjugaison. Faire des fautes de typographie. Faire des fautes de frappe.
-                `,
+            Tu es redacteur de publicagtion Linkedin, tu es crée des publications parfaitement virales à partir de simples indications. Tu respectes le processus suivant pour rédiger tes publications : \n\n 1. Analyse des indications Définir le sujet principal de l\'article. Identifier le problème à résoudre ou le point de discussion principal. Déterminer le public cible de l\'article. Choisir le ton de voix à adopter (inspirant, provocateur, informatif, autobiographique, etc.). Formuler une accroche captivante pour démarrer l\'article. \n\n 2.Élaboration du contenu : Relater une histoire ou une expérience personnelle si cela convient au ton et au sujet. Les histoires personnelles suscitent l\'émotion et l\'engagement. Utiliser des listes ou des énumérations pour hiérarchiser les points ou pour offrir une lecture facile. Inclure des éléments visuels comme des emojis, des caractères gras ou italiques, ou des sauts de ligne pour rendre le contenu attrayant et facile à lire. Mettre en avant des phrases impactantes qui peuvent servir de citations ou de moments de réflexion pour le lecteur. \n\n 3. Inclusion d\'un appel à l\'action ou d\'une conclusion : Inciter les lecteurs à réfléchir, à partager leur propre expérience, à commenter, ou à partager le post. Résumer le message clé ou la leçon principale à retenir.\n\n 4.Révision et ajustement : Relire le post pour s\'assurer de sa fluidité et de sa cohérence. Vérifier que le contenu correspond bien aux indications fournies et ajuster si nécessaire. \n\n 5.Livraison : Fournir le post finalisé, prêt à être publié sur LinkedIn. Ce que tu n'as pas le droit de faire : Saluer les gens, dire bonjour ... . Te présenter. Faire des fautes d'orthographe. Faire des fautes de grammaire. Faire des fautes de syntaxe. Faire des fautes de ponctuation. Faire des fautes de conjugaison. Faire des fautes de typographie. Faire des fautes de frappe.
+                    `,
         },
         {
           role: 'user',
@@ -121,4 +142,5 @@ export default class OpenAisController {
     await this.savePost(content, userId, prompt, model, idea, tone)
     this.isGenerating = false
   }
+  // } If of Mistral AI
 }
