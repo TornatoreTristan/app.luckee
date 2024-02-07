@@ -56,7 +56,7 @@
             <textarea
               v-model="editablePost.content"
               @input="adjustTextareaHeight"
-              class="w-[500px] mx-auto resize-none overflow-hidden mt-6 text-sm border-2 border-slate-300 rounded-lg p-4"
+              class="max-w-[500px] mx-auto resize-none overflow-hidden mt-6 text-sm border-2 border-slate-300 rounded-lg p-4"
               :style="{ height: `${height}px` }"
             ></textarea>
             <div class="flex gap-4">
@@ -65,7 +65,7 @@
             </div>
           </div>
           <div v-else @click="editMode">
-            <p class="whitespace-pre-line w-[500px] mt-6 mx-auto">{{ selectedPost.content }}</p>
+            <p class="whitespace-pre-line max-w-[500px] mt-6 mx-auto">{{ selectedPost.content }}</p>
           </div>
           <hr class="mt-8" />
           <div class="bg-slate-100 px-8 py-4 mt-4 rounded-xl">
