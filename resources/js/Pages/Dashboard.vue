@@ -30,7 +30,9 @@
         <p class="py-2">
           Nous avons préparé un article pour expliquer toutes nos dernières mise à jour.
         </p>
-        <Link href="/"> Retrouve le rapport des évolutions de la version 0.5 ici</Link>
+        <Link href="https://www.lukee.io/changelog/update-beta-0-5" target="_blank">
+          Retrouve le rapport des évolutions de la version 0.5 ici</Link
+        >
       </div>
     </div>
     <div class="flex flex-col md:flex-row gap-4 mt-8">

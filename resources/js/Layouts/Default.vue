@@ -10,7 +10,7 @@
           <div
             class="px-2 flex justify-center items-center bg-emerald-100 text-emerald-600 rounded-lg text-xs font-bold"
           >
-            beta-0.4
+            beta-0.5
           </div>
         </div>
 
