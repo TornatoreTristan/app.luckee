@@ -1,6 +1,6 @@
 <template>
   <h1>Tableau de bord admin</h1>
-  <div class="flex gap-4 items-start mb-8">
+  <div class="md:flex gap-4 items-start mb-8">
     <div
       class="bg-white p-8 border-2 border-slate-200 rounded-xl flex flex-col justify-center items-center"
     >
@@ -38,7 +38,7 @@
       </tr>
     </thead>
     <tbody class="text-sm">
-      <tr v-for="user in users" :key="user.id">
+      <tr v-for="user in paginatedUsers" :key="user.id">
         <td class="flex gap-2 items-center">
           <img :src="user.avatar" alt="image utilisateur" class="rounded-full w-12" />
           {{ user.first_name }} {{ user.last_name }}
@@ -58,16 +58,46 @@
       </tr>
     </tbody>
   </table>
+  <div class="flex justify-center mt-4">
+    <button @click="prevPage" :disabled="currentPage <= 1">Précédent</button>
+    <span class="px-4">{{ currentPage }} / {{ totalPages }}</span>
+    <button @click="nextPage" :disabled="currentPage >= totalPages">Suivant</button>
+  </div>
 </template>
 
 <script setup>
 import DateFormat from '../Components/Utils/DateFormat.vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
+
+const currentPage = ref(1)
+const usersPerPage = 10
 
 const { users, posts } = usePage().props.value
 
 const countPostByUser = (userId) => {
   return posts.filter((post) => post.user_id === userId).length
+}
+
+const totalPages = computed(() => {
+  return Math.ceil(users.length / usersPerPage)
+})
+
+const paginatedUsers = computed(() => {
+  const start = (currentPage.value - 1) * usersPerPage
+  const end = start + usersPerPage
+  return users.slice(start, end)
+})
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+  }
 }
 </script>
