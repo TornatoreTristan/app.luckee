@@ -142,8 +142,9 @@
     </div>
     <footer class="container-content py-8">
       <hr class="my-4" />
-      <div class="flex flex-col md:flex-row items-start justify-center md:justify-between">
-        <div class="w-6/12">
+
+      <div class="flex flex-col md:flex-row items-center md:items-start justify-between">
+        <div class="w-full flex justify-center flex-col items-center lg:block md:w-6/12">
           <img src="/icon-luckee.svg" class="mb-8" alt="icon luckee" width="50px" height="50px" />
           <p class="text-xs mb-1">© Tristan TORNATORE & Kélian LALLOUÉ</p>
           <p class="text-xs">Tous droits réservés</p>
