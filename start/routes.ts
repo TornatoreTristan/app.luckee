@@ -63,6 +63,9 @@ Route.get('/linkedin/callback', async ({ ally, auth, response }) => {
   const linkedInUser = await linkedin.user()
   console.log(linkedInUser)
 
+  const tokenExpiryDate = new Date()
+  tokenExpiryDate.setSeconds(tokenExpiryDate.getSeconds() + linkedInUser.token.expiresIn)
+
   const user = await User.firstOrCreate(
     {
       email: linkedInUser.email ?? 'default@example.com',
@@ -76,6 +79,16 @@ Route.get('/linkedin/callback', async ({ ally, auth, response }) => {
       email: linkedInUser.email ?? 'default@example.com',
     }
   )
+
+  if (user.linkedin_token !== linkedInUser.token.token) {
+    user.linkedin_token = linkedInUser.token.token
+    await user.save()
+  }
+
+  if (user.avatar !== linkedInUser.avatarUrl) {
+    user.avatar = linkedInUser.avatarUrl
+    await user.save()
+  }
 
   await auth.use('web').login(user)
 
